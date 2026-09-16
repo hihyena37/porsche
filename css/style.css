@@ -1,0 +1,265 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+@font-face {
+  font-family: "Porsche Next";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://cdn.ui.porsche.com/porsche-design-system/fonts/porsche-next-latin-regular.b8f1c20.woff2") format("woff2");
+  font-display: swap;
+}
+
+body{
+  font-family: "Porsche Next", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", "Arial Narrow", Arial, sans-serif;
+}
+
+/* 헤더 */
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+/* 원본 hero_dark-theme 배경: 모바일 72px, 760px부터 148px */
+header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 72px;
+  pointer-events: none;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.8) 8.1%,
+    rgba(0, 0, 0, 0.8) 15.5%,
+    rgba(0, 0, 0, 0.8) 22.5%,
+    rgba(0, 0, 0, 0.78) 29%,
+    rgba(0, 0, 0, 0.73) 35.3%,
+    rgba(0, 0, 0, 0.67) 41.2%,
+    rgba(0, 0, 0, 0.6) 47.1%,
+    rgba(0, 0, 0, 0.52) 52.9%,
+    rgba(0, 0, 0, 0.44) 58.8%,
+    rgba(0, 0, 0, 0.33) 64.7%,
+    rgba(0, 0, 0, 0.22) 71%,
+    rgba(0, 0, 0, 0.12) 77.5%,
+    rgba(0, 0, 0, 0.05) 84.5%,
+    rgba(0, 0, 0, 0.01) 91.9%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.header_i {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 4.125rem;
+  padding: 0 max(22px, calc(10.625vw - 12px));
+}
+
+/* menu */
+.menu {
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 4px;
+  margin: 6px;
+  padding: 0;
+  font: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  border: 0;
+  background: transparent;
+  color: #fafbff;
+  cursor: pointer;
+}
+
+.ham {
+  display: block;
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.text_menu {
+  color: inherit;
+}
+
+/* logo */
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  color: #fafbff;
+  width: max-content;
+  padding: 0;
+}
+
+.logo .crest {
+  display: block;
+  width: 30px;
+  height: 40px;
+}
+
+.logo svg {
+  display: none;
+  width: auto;
+  /* 원본 wordmark는 높이를 기준으로 15:1 비율을 유지한다. */
+  height: clamp(0.63rem, 0.5rem + 0.42vw, 1rem);
+  fill: currentColor;
+}
+
+@supports (height: round(down, 1px, 1px)) {
+  .logo svg {
+    height: round(down, clamp(0.63rem, 0.5rem + 0.42vw, 1rem), 1px);
+  }
+}
+
+/* util */
+.util {
+  display: flex;
+  align-items: center;
+}
+
+.country,
+.my {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 6px;
+  border: 0;
+  background: transparent;
+  color: #fafbff;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+}
+
+.util svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.my svg {
+  fill: currentColor;
+}
+
+.menu::before,
+.country::before,
+.my::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  transition: background-color .25s cubic-bezier(.25, .1, .25, 1);
+}
+
+.country::before,
+.my::before {
+  inset: 4px;
+}
+
+.menu > *,
+.country > *,
+.my > * {
+  position: relative;
+}
+
+@media (hover: hover) {
+  .menu:hover::before,
+  .country:hover::before,
+  .my:hover::before {
+    backdrop-filter: blur(32px);
+    background-color: rgba(156, 156, 159, .302);
+  }
+}
+
+header a:focus-visible,
+header button:focus-visible {
+  outline: 2px solid #1a44ea;
+  outline-offset: 2px;
+}
+
+/* 원본 헤더의 화면 너비별 높이와 여백 */
+@media (max-width: 759px) {
+  .text_menu {
+    display: none;
+  }
+}
+
+@media (min-width: 480px) {
+  .header_i { height: 5rem; }
+}
+
+@media (min-width: 760px) {
+  header::before { height: 148px; }
+  .header_i {
+    height: 4.5625rem;
+    padding-inline: max(calc(5vw - 16px), clamp(16px, calc(12px + 1.25vw), 36px));
+  }
+  .menu { margin: 8px; }
+  .menu::before {
+    left: -4px;
+    right: -4px;
+    border-radius: 8px;
+  }
+  .logo .crest { display: none; }
+  .logo svg { display: block; }
+}
+
+@media (min-width: 1000px) {
+  .header_i { height: 4.75rem; }
+  .country,
+  .my {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+  }
+  .country::before,
+  .my::before { inset: 6px; }
+}
+
+@media (min-width: 1300px) {
+  .header_i { height: 5.125rem; }
+}
+
+@media (min-width: 1760px) {
+  .country,
+  .my {
+    width: 48px;
+    height: 48px;
+    padding: 12px;
+  }
+  .country::before,
+  .my::before { inset: 10px; }
+}
+
+@media (min-width: 1920px) {
+  .header_i { padding-inline: calc(50vw - 880px); }
+}
