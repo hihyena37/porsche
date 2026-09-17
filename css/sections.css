@@ -1,0 +1,274 @@
+/* 공식 ChGrid, HomeStage, EnhancedFinder, p-link-tile의 확인된 규칙. */
+@font-face {
+  font-family: "Porsche Next";
+  font-style: normal;
+  font-weight: 600;
+  src: url("https://cdn.ui.porsche.com/porsche-design-system/fonts/porsche-next-latin-semi-bold.b5f6fca.woff2") format("woff2");
+  font-display: swap;
+}
+
+:root {
+  --space-xs: clamp(4px, 3px + .25vw, 8px);
+  --space-md: clamp(16px, 12px + 1.25vw, 36px);
+  --space-lg: clamp(32px, 23px + 2.75vw, 76px);
+  --space-xl: clamp(48px, 38px + 3vw, 96px);
+  --space-2xl: clamp(80px, 56px + 7.5vw, 200px);
+  --card-text: clamp(1.13rem, .21vw + 1.08rem, 1.33rem);
+  --tile-gradient: linear-gradient(to top,
+    rgba(1,2,5,.8) 0%, rgba(1,2,5,.8) 8.1%, rgba(1,2,5,.8) 15.5%,
+    rgba(1,2,5,.8) 22.5%, rgba(1,2,5,.78) 29%, rgba(1,2,5,.73) 35.3%,
+    rgba(1,2,5,.67) 41.2%, rgba(1,2,5,.6) 47.1%, rgba(1,2,5,.52) 52.9%,
+    rgba(1,2,5,.44) 58.8%, rgba(1,2,5,.33) 64.7%, rgba(1,2,5,.22) 71%,
+    rgba(1,2,5,.12) 77.5%, rgba(1,2,5,.05) 84.5%, rgba(1,2,5,.011) 91.9%, rgba(1,2,5,0) 100%);
+}
+
+.page_grid {
+  --safe-zone: max(22px, 10.625vw - 12px);
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns:
+    [full-start] minmax(0, calc(var(--safe-zone) - var(--space-md)))
+    [basic-start] repeat(6, minmax(0, 1fr))
+    [basic-end] minmax(0, calc(var(--safe-zone) - var(--space-md))) [full-end];
+  min-width: 320px;
+  max-width: 2560px;
+  box-sizing: content-box;
+  padding-inline: max(0px, calc(50% - 1280px));
+}
+
+/* 주요 차량 카드: 모바일 1열, 1000px부터 3열 */
+.featured {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-lg);
+}
+
+.featured_card,
+.discover_card {
+  position: relative;
+  display: grid;
+  grid-column: basic-start / basic-end;
+  grid-template: var(--space-md) auto minmax(0, 1fr) auto var(--space-md)
+    / var(--space-md) minmax(0, 1fr) var(--space-md);
+  aspect-ratio: 4 / 3;
+  min-width: 0;
+  border-radius: 24px;
+  color: #fafbff;
+  isolation: isolate;
+  text-decoration: none;
+}
+
+.featured_card > .featured_media,
+.discover_card > picture {
+  grid-area: 1 / 1 / -1 / -1;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+  overflow: hidden;
+  z-index: -2;
+}
+
+.featured_media img,
+.discover_card picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.featured_card::after,
+.discover_card::after {
+  content: "";
+  grid-area: 4 / 1 / -1 / -1;
+  margin-top: calc(-1 * var(--space-lg));
+  background: var(--tile-gradient);
+  border-radius: 0 0 24px 24px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.featured_footer {
+  grid-area: 4 / 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+}
+
+.featured_footer h2,
+.featured_footer h3 {
+  font-size: var(--card-text);
+  font-weight: 400;
+  line-height: calc(6px + 2.125ex);
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.featured_arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: end;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: inherit;
+  background: rgba(156,156,159,.302);
+  backdrop-filter: blur(32px);
+  transform: translate3d(0,0,0);
+  transition: background-color .25s cubic-bezier(.25,.1,.25,1);
+}
+.featured_arrow svg { display: block; width: 24px; height: 24px; fill: currentColor; }
+
+.featured_card:focus-visible,
+.discover_card:focus-visible {
+  outline: 2px solid #1a44ea;
+  outline-offset: 2px;
+}
+
+/* 이미지 확대는 모서리 안에서만 일어나도록 미디어 컨테이너에서 자른다. */
+.featured_media img,
+.discover_card picture img {
+  transition: transform .4s cubic-bezier(.25,.1,.25,1);
+}
+
+@media (hover: hover) {
+  .featured_card:hover .featured_media img { transform: scale3d(1.05,1.05,1.05); }
+  .discover_card:hover picture img { transform: scale3d(1.05,1.05,1.05); }
+  .featured_card:hover .featured_arrow,
+  .discover_card:hover .featured_arrow { background: hsla(240,2%,43%,.228); }
+}
+
+/* 파인더: 원본은 1000px 미만에서 이미지가 아래쪽으로 이동한다. */
+.finder {
+  position: relative;
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  row-gap: 0;
+  grid-template-rows: [content] max-content [input] calc(var(--space-2xl) * 2) [image] max-content;
+  color: #010205;
+}
+
+.finder_text {
+  grid-area: content / basic-start / content / basic-end;
+  margin-block: var(--space-md);
+}
+
+.finder_title {
+  margin-bottom: var(--space-xs);
+  font-size: clamp(1.42rem, .94vw + 1.23rem, 2.37rem);
+  font-weight: 600;
+  line-height: calc(6px + 2.125ex);
+}
+
+.finder_text p,
+.finder_search {
+  font-size: 16px;
+  line-height: calc(6px + 2.125ex);
+}
+
+.finder_search { grid-area: input / basic-start / input / basic-end; }
+.finder_search label { display: block; opacity: .4; margin-bottom: 4px; }
+.finder_input_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 56px;
+  padding-inline: 16px;
+  border: 1px solid rgba(79,80,89,.325);
+  border-radius: 12px;
+  background: hsla(240,5%,70%,.148);
+  opacity: .4;
+  cursor: not-allowed;
+}
+.finder_input_wrapper > * { opacity: .4; }
+.finder_input_wrapper img { flex: 0 0 24px; }
+.finder_input_wrapper input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  line-height: 30px;
+  color: #010205;
+  text-overflow: ellipsis;
+  cursor: not-allowed;
+}
+.finder_input_wrapper input::placeholder { color: inherit; opacity: 1; }
+.finder_image {
+  grid-area: image / full-start / image / full-end;
+  margin-top: var(--space-md);
+  overflow: hidden;
+  z-index: -1;
+}
+.finder_image img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
+
+/* Discover의 모바일 비율은 16:9, 데스크톱은 1:1 */
+.discover { padding-bottom: var(--space-xl); color: #010205; }
+.discover_title {
+  grid-column: basic-start / basic-end;
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  font-size: clamp(1.6rem, 1.56vw + 1.29rem, 3.16rem);
+  font-weight: 600;
+  line-height: calc(6px + 2.125ex);
+  text-align: center;
+}
+.discover_card { aspect-ratio: 16 / 9; }
+
+@media (min-width: 480px) {
+  .finder { grid-template-rows: [content] max-content [input] calc(var(--space-2xl) + var(--space-lg)) [image] max-content; }
+}
+
+@media (min-width: 760px) {
+  .page_grid {
+    --safe-zone: calc(5vw - 16px);
+    grid-template-columns:
+      [full-start] minmax(0, calc(var(--safe-zone) - var(--space-md)))
+      repeat(2, minmax(0, 1fr)) [basic-start] repeat(12, minmax(0, 1fr))
+      [basic-end] repeat(2, minmax(0, 1fr))
+      minmax(0, calc(var(--safe-zone) - var(--space-md))) [full-end];
+  }
+  .finder_text { margin: var(--space-md); }
+  .finder_search { margin-inline: var(--space-md); }
+}
+
+@media (min-width: 1000px) {
+  .featured_card:first-child,
+  .discover_card:first-child { grid-column: basic-start / span 4; }
+  .featured_card:nth-child(2), .featured_card:nth-child(3),
+  .discover_card:nth-child(2), .discover_card:nth-child(3) { grid-column: span 4; }
+  .discover_card { aspect-ratio: 1; }
+  .finder { grid-template-rows: [content] max-content [input] calc(var(--space-2xl) + var(--space-lg)) [image] max-content [bottom] var(--space-2xl); }
+  .finder_text, .finder_search { grid-column: basic-start / span 6; }
+  .finder_image { grid-area: 1 / span 9 / -1 / full-end; margin-top: 0; }
+}
+
+@media (min-width: 1000px) and (max-width: 1299px) {
+  .finder_image img { object-fit: contain; }
+}
+@media (min-width: 1300px) {
+  .finder_text { margin-top: var(--space-lg); }
+}
+@media (min-width: 1920px) {
+  .page_grid { --safe-zone: min(50vw - 880px, 400px); }
+}
+
+/* 원본과 동일한 스크롤 진입 애니메이션. JS 실패 시에는 내용을 숨기지 않는다. */
+.reveal_pending { opacity: 0; transform: translateY(30px); }
+.reveal_visible { animation: cards_enter 1.2s cubic-bezier(0,0,.2,1) forwards; }
+@keyframes cards_enter {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (min-width: 1000px) {
+  .reveal_visible:nth-child(2) { animation-delay: .2s; }
+  .reveal_visible:nth-child(3) { animation-delay: .4s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal_pending, .reveal_visible { opacity: 1; transform: none; animation: none; }
+}

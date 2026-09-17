@@ -26,7 +26,7 @@ img {
   font-display: swap;
 }
 
-body{
+body {
   font-family: "Porsche Next", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", "Arial Narrow", Arial, sans-serif;
 }
 
@@ -48,24 +48,22 @@ header::before {
   width: 100%;
   height: 72px;
   pointer-events: none;
-  background: linear-gradient(
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.8) 8.1%,
-    rgba(0, 0, 0, 0.8) 15.5%,
-    rgba(0, 0, 0, 0.8) 22.5%,
-    rgba(0, 0, 0, 0.78) 29%,
-    rgba(0, 0, 0, 0.73) 35.3%,
-    rgba(0, 0, 0, 0.67) 41.2%,
-    rgba(0, 0, 0, 0.6) 47.1%,
-    rgba(0, 0, 0, 0.52) 52.9%,
-    rgba(0, 0, 0, 0.44) 58.8%,
-    rgba(0, 0, 0, 0.33) 64.7%,
-    rgba(0, 0, 0, 0.22) 71%,
-    rgba(0, 0, 0, 0.12) 77.5%,
-    rgba(0, 0, 0, 0.05) 84.5%,
-    rgba(0, 0, 0, 0.01) 91.9%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  background: linear-gradient(rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.8) 8.1%,
+      rgba(0, 0, 0, 0.8) 15.5%,
+      rgba(0, 0, 0, 0.8) 22.5%,
+      rgba(0, 0, 0, 0.78) 29%,
+      rgba(0, 0, 0, 0.73) 35.3%,
+      rgba(0, 0, 0, 0.67) 41.2%,
+      rgba(0, 0, 0, 0.6) 47.1%,
+      rgba(0, 0, 0, 0.52) 52.9%,
+      rgba(0, 0, 0, 0.44) 58.8%,
+      rgba(0, 0, 0, 0.33) 64.7%,
+      rgba(0, 0, 0, 0.22) 71%,
+      rgba(0, 0, 0, 0.12) 77.5%,
+      rgba(0, 0, 0, 0.05) 84.5%,
+      rgba(0, 0, 0, 0.01) 91.9%,
+      rgba(0, 0, 0, 0) 100%);
 }
 
 .header_i {
@@ -185,13 +183,14 @@ header::before {
   inset: 4px;
 }
 
-.menu > *,
-.country > *,
-.my > * {
+.menu>*,
+.country>*,
+.my>* {
   position: relative;
 }
 
 @media (hover: hover) {
+
   .menu:hover::before,
   .country:hover::before,
   .my:hover::before {
@@ -255,11 +254,8 @@ header button:focus-visible {
   display: grid;
   column-gap: var(--hero-gap);
   grid-template-columns:
-    [full-start] minmax(0, calc(var(--hero-safe-zone) - var(--hero-gap)))
-    [extended-start] repeat(6, minmax(0, 1fr))
-    [extended-end] minmax(0, calc(var(--hero-safe-zone) - var(--hero-gap))) [full-end];
-  grid-template-rows: auto [headline] max-content [cta] minmax(calc(var(--hero-gap) + 54px), max-content)
-    [scroll] max-content [bottom] var(--hero-gap);
+    [full-start] minmax(0, calc(var(--hero-safe-zone) - var(--hero-gap))) [extended-start] repeat(6, minmax(0, 1fr)) [extended-end] minmax(0, calc(var(--hero-safe-zone) - var(--hero-gap))) [full-end];
+  grid-template-rows: auto [headline] max-content [cta] minmax(calc(var(--hero-gap) + 54px), max-content) [scroll] max-content [bottom] var(--hero-gap);
   min-width: 320px;
   max-width: 2560px;
   box-sizing: content-box;
@@ -315,8 +311,15 @@ header button:focus-visible {
 }
 
 @keyframes hero_button_enter {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero_playback {
@@ -349,7 +352,9 @@ header button:focus-visible {
   fill: currentColor;
 }
 
-.hero_playback_button svg[hidden] { display: none; }
+.hero_playback_button svg[hidden] {
+  display: none;
+}
 
 .hero_playback_button:focus-visible {
   outline: 2px solid #1a44ea;
@@ -357,12 +362,19 @@ header button:focus-visible {
 }
 
 @media (hover: hover) {
-  .hero_playback_button:hover { background-color: hsla(240, 2%, 43%, .228); }
+  .hero_playback_button:hover {
+    background-color: hsla(240, 2%, 43%, .228);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .hero_link_frame,
-  .hero_playback { animation: none; opacity: 1; transform: none; }
+  .hero_playback {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .hero_link:focus-visible {
@@ -371,7 +383,9 @@ header button:focus-visible {
 }
 
 @media (hover: hover) {
-  .hero_link:hover { background-color: hsla(240, 2%, 43%, .228); }
+  .hero_link:hover {
+    background-color: hsla(240, 2%, 43%, .228);
+  }
 }
 
 /* 다음 단계에 추가할 원본 스크롤 표시 영역의 공간 */
@@ -388,47 +402,59 @@ header button:focus-visible {
   grid-area: headline / full-start / -1 / full-end;
   pointer-events: none;
   background: linear-gradient(0deg,
-    rgba(0,0,0,.8) 0%, rgba(0,0,0,.8) 8.1%, rgba(0,0,0,.8) 15.5%,
-    rgba(0,0,0,.8) 22.5%, rgba(0,0,0,.78) 29%, rgba(0,0,0,.73) 35.3%,
-    rgba(0,0,0,.67) 41.2%, rgba(0,0,0,.6) 47.1%, rgba(0,0,0,.52) 52.9%,
-    rgba(0,0,0,.44) 58.8%, rgba(0,0,0,.33) 64.7%, rgba(0,0,0,.22) 71%,
-    rgba(0,0,0,.12) 77.5%, rgba(0,0,0,.05) 84.5%, rgba(0,0,0,.01) 91.9%, transparent);
-}
-
-.featured{
-  
+      rgba(0, 0, 0, .8) 0%, rgba(0, 0, 0, .8) 8.1%, rgba(0, 0, 0, .8) 15.5%,
+      rgba(0, 0, 0, .8) 22.5%, rgba(0, 0, 0, .78) 29%, rgba(0, 0, 0, .73) 35.3%,
+      rgba(0, 0, 0, .67) 41.2%, rgba(0, 0, 0, .6) 47.1%, rgba(0, 0, 0, .52) 52.9%,
+      rgba(0, 0, 0, .44) 58.8%, rgba(0, 0, 0, .33) 64.7%, rgba(0, 0, 0, .22) 71%,
+      rgba(0, 0, 0, .12) 77.5%, rgba(0, 0, 0, .05) 84.5%, rgba(0, 0, 0, .01) 91.9%, transparent);
 }
 
 @media (min-width: 760px) {
   .hero {
     --hero-safe-zone: calc(5vw - 16px);
     grid-template-columns:
-      [full-start] minmax(0, calc(var(--hero-safe-zone) - var(--hero-gap)))
-      minmax(0, 1fr) [extended-start] repeat(14, minmax(0, 1fr))
-      [extended-end] minmax(0, 1fr)
-      minmax(0, calc(var(--hero-safe-zone) - var(--hero-gap))) [full-end];
+      [full-start] minmax(0, calc(var(--hero-safe-zone) - var(--hero-gap))) minmax(0, 1fr) [extended-start] repeat(14, minmax(0, 1fr)) [extended-end] minmax(0, 1fr) minmax(0, calc(var(--hero-safe-zone) - var(--hero-gap))) [full-end];
   }
-  .hero_link_frame { width: fit-content; }
-  .hero::after { grid-row: cta / -1; }
+
+  .hero_link_frame {
+    width: fit-content;
+  }
+
+  .hero::after {
+    grid-row: cta / -1;
+  }
 }
 
 @media (min-width: 1000px) {
-  .hero_playback_button { padding: 16px; }
+  .hero_playback_button {
+    padding: 16px;
+  }
+
   .hero {
     --hero-scroll-padding: var(--hero-gap);
     --hero-scroll-size: 45px;
   }
+
   .hero_title,
-  .hero_cta { grid-column: extended-start / span 7; }
-  .hero_title { padding-top: clamp(32px, 23px + 2.75vw, 76px); }
+  .hero_cta {
+    grid-column: extended-start / span 7;
+  }
+
+  .hero_title {
+    padding-top: clamp(32px, 23px + 2.75vw, 76px);
+  }
 }
 
 @media (min-width: 1300px) {
-  .hero { --hero-scroll-size: 54px; }
+  .hero {
+    --hero-scroll-size: 54px;
+  }
 }
 
 @media (min-width: 1920px) {
-  .hero { --hero-safe-zone: min(50vw - 880px, 400px); }
+  .hero {
+    --hero-safe-zone: min(50vw - 880px, 400px);
+  }
 }
 
 /* 원본 헤더의 화면 너비별 높이와 여백 */
@@ -439,52 +465,81 @@ header button:focus-visible {
 }
 
 @media (min-width: 480px) {
-  .header_i { height: 5rem; }
+  .header_i {
+    height: 5rem;
+  }
 }
 
 @media (min-width: 760px) {
-  header::before { height: 148px; }
+  header::before {
+    height: 148px;
+  }
+
   .header_i {
     height: 4.5625rem;
     padding-inline: max(calc(5vw - 16px), clamp(16px, calc(12px + 1.25vw), 36px));
   }
-  .menu { margin: 8px; }
+
+  .menu {
+    margin: 8px;
+  }
+
   .menu::before {
     left: -4px;
     right: -4px;
     border-radius: 8px;
   }
-  .logo .crest { display: none; }
-  .logo svg { display: block; }
+
+  .logo .crest {
+    display: none;
+  }
+
+  .logo svg {
+    display: block;
+  }
 }
 
 @media (min-width: 1000px) {
-  .header_i { height: 4.75rem; }
+  .header_i {
+    height: 4.75rem;
+  }
+
   .country,
   .my {
     width: 40px;
     height: 40px;
     padding: 8px;
   }
+
   .country::before,
-  .my::before { inset: 6px; }
+  .my::before {
+    inset: 6px;
+  }
 }
 
 @media (min-width: 1300px) {
-  .header_i { height: 5.125rem; }
+  .header_i {
+    height: 5.125rem;
+  }
 }
 
 @media (min-width: 1760px) {
+
   .country,
   .my {
     width: 48px;
     height: 48px;
     padding: 12px;
   }
+
   .country::before,
-  .my::before { inset: 10px; }
+  .my::before {
+    inset: 10px;
+  }
 }
 
 @media (min-width: 1920px) {
-  .header_i { padding-inline: calc(50vw - 880px); }
+  .header_i {
+    padding-inline: calc(50vw - 880px);
+  }
 }
