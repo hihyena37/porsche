@@ -23,7 +23,8 @@
 
       <!-- 로고 -->
       <a href="#" class="logo" aria-label="Porsche">
-        <img class="crest" src="https://cdn.ui.porsche.com/porsche-design-system/crest/porsche-crest.8a292fb@2x.png" width="30" height="40" alt="">
+        <img class="crest" src="https://cdn.ui.porsche.com/porsche-design-system/crest/porsche-crest.8a292fb@2x.png"
+          width="30" height="40" alt="">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4500 300">
           <title>Porsche</title>
           <path
@@ -35,21 +36,17 @@
       <!-- 사용자아이콘 -->
       <div class="util">
         <!-- 국가선택기 -->
-        <button
-        class="country"
-        type="button"
-        aria-label="국가 선택기">
-          <img src="https://cdn.ui.porsche.com/porsche-design-system/flags/kr.f9b3228.svg" width="24" height="24" alt="">
+        <button class="country" type="button" aria-label="국가 선택기">
+          <img src="https://cdn.ui.porsche.com/porsche-design-system/flags/kr.f9b3228.svg" width="24" height="24"
+            alt="">
         </button>
 
         <!-- 계정 -->
-        <button
-        class="my"
-        type="button"
-        aria-label="계정">
+        <button class="my" type="button" aria-label="계정">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <!-- Porsche Design System: user.c18dabe.svg -->
-            <path d="M12 5.5c3.5 0 2.92 3.85 2.92 3.85l.53.22c.02.04.05 1.43-.17 1.81l-.12.27C14.5 15 13 15.5 12 15.5s-2.5-.5-3.16-3.85l-.11-.26a5 5 0 0 1-.18-1.82l.53-.22S8.5 5.5 12 5.5m0-1c-4.14 0-3.92 3.8-3.92 4.19 0 0-.58.24-.58 1.15v.94c0 .54.38 1.14.38 1.14S8.5 16.5 12 16.5s4.12-4.58 4.12-4.58.38-.6.38-1.14v-.94c0-.9-.58-1.15-.58-1.15 0-.4.22-4.19-3.92-4.19m3.06 11.68c-.65.89-1.86 1.34-3.06 1.34s-2.41-.45-3.06-1.34C6 17.5 3.5 18 3.5 20h1c0-1 2.7-2.02 4.18-2.64A5 5 0 0 0 12 18.52c1.3 0 2.5-.43 3.32-1.16 1.46.6 4.18 1.64 4.18 2.64h1c0-1.5-2.5-2.5-5.44-3.82" />
+            <path
+              d="M12 5.5c3.5 0 2.92 3.85 2.92 3.85l.53.22c.02.04.05 1.43-.17 1.81l-.12.27C14.5 15 13 15.5 12 15.5s-2.5-.5-3.16-3.85l-.11-.26a5 5 0 0 1-.18-1.82l.53-.22S8.5 5.5 12 5.5m0-1c-4.14 0-3.92 3.8-3.92 4.19 0 0-.58.24-.58 1.15v.94c0 .54.38 1.14.38 1.14S8.5 16.5 12 16.5s4.12-4.58 4.12-4.58.38-.6.38-1.14v-.94c0-.9-.58-1.15-.58-1.15 0-.4.22-4.19-3.92-4.19m3.06 11.68c-.65.89-1.86 1.34-3.06 1.34s-2.41-.45-3.06-1.34C6 17.5 3.5 18 3.5 20h1c0-1 2.7-2.02 4.18-2.64A5 5 0 0 0 12 18.52c1.3 0 2.5-.43 3.32-1.16 1.46.6 4.18 1.64 4.18 2.64h1c0-1.5-2.5-2.5-5.44-3.82" />
           </svg>
         </button>
       </div>
@@ -57,10 +54,59 @@
   </header>
   <!-- header -->
 
+  <!-- hero -->
+  <section class="hero" aria-label="포르쉐 바이브 서울">
+    <video class="hero_video" autoplay muted loop playsinline aria-label="포르쉐 바이브 서울 영상">
+      <source src="./mv/porsche_hero.mp4" type="video/mp4">
+    </video>
+    <img class="hero_thumbnail" src="./image/filters_format(webp)_quality(85).webp" width="1759" height="989" alt=""
+      fetchpriority="high">
+
+    <h1 class="hero_title">포르쉐 바이브 서울</h1>
+
+    <div class="hero_cta">
+      <div class="hero_link_frame">
+        <a class="hero_link" href="https://www.porsche.com/korea/ko/porsche-vibe-seoul/">더 알아보기</a>
+      </div>
+    </div>
+
+    <div class="hero_playback">
+      <button class="hero_playback_button" type="button" aria-label="비디오 재생">
+        <!-- 원본 Porsche Design System: pause.65f20ae.svg / play-filled.0fb6689.svg -->
+        <svg class="hero_pause_icon" viewBox="0 0 24 24" aria-hidden="true" hidden>
+          <path d="M16 5v14h-1.5V5zM9.5 5v14H8V5z" />
+        </svg>
+        <svg class="hero_play_icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m8 20 11-8L8 4z" />
+        </svg>
+      </button>
+    </div>
+  </section>
+  <!-- hero -->
+
+  <!-- featured -->
+  <section class="featured">
+    <a href="#" class="featured_card">
+      <img src="./image/panamera4.webp" alt="panamera4">
+      <h2>Panamera 4</h2>
+    </a>
+
+    <a href="#" class="featured_card">
+      <img src="./image/911turbos.webp" alt="911turbos">
+      <h2>911 Turbo S</h2>
+    </a>
+
+    <a href="#" class="featured_card">
+      <img src="./image/cayenneturboelctric.webp" alt="cayenneturboelctric">
+      <h2>Cayenne Turbo Elctric</h2>
+    </a>
+  </section>
+  <!-- featured -->
 
 
   <!-- footer -->
   <!-- footer -->
+  <script src="./js/hero.js"></script>
 </body>
 
 </html>

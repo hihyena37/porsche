@@ -206,6 +206,231 @@ header button:focus-visible {
   outline-offset: 2px;
 }
 
+/* 히어로 */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* 원본처럼 모바일 브라우저의 주소창이 보일 때의 화면 높이를 기준으로 한다. */
+@supports (height: 100svh) {
+  .hero {
+    min-height: 100svh;
+  }
+}
+
+/* 원본의 중앙 정렬·확대·잘림 동작을 로컬 MP4에 적용한다. */
+.hero_video,
+.hero_thumbnail {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* 원본처럼 영상 위에 이미지를 표시한 뒤 0.25초 동안 숨긴다. */
+.hero_thumbnail {
+  z-index: 1;
+  background-color: #fff;
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 0.25s ease-in, opacity 0.25s ease-in;
+}
+
+.hero.is-playing .hero_thumbnail {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* 원본 HomeStageMain / ChGrid의 열·행 배치 */
+.hero {
+  --hero-gap: clamp(16px, 12px + 1.25vw, 36px);
+  --hero-safe-zone: max(22px, 10.625vw - 12px);
+  --hero-scroll-padding: clamp(32px, 23px + 2.75vw, 76px);
+  --hero-scroll-size: 40px;
+  display: grid;
+  column-gap: var(--hero-gap);
+  grid-template-columns:
+    [full-start] minmax(0, calc(var(--hero-safe-zone) - var(--hero-gap)))
+    [extended-start] repeat(6, minmax(0, 1fr))
+    [extended-end] minmax(0, calc(var(--hero-safe-zone) - var(--hero-gap))) [full-end];
+  grid-template-rows: auto [headline] max-content [cta] minmax(calc(var(--hero-gap) + 54px), max-content)
+    [scroll] max-content [bottom] var(--hero-gap);
+  min-width: 320px;
+  max-width: 2560px;
+  box-sizing: content-box;
+  padding-inline: max(0px, calc(50% - 1280px));
+  color: #fafbff;
+}
+
+.hero_title,
+.hero_cta {
+  position: relative;
+  z-index: 3;
+  grid-column: extended-start / extended-end;
+}
+
+.hero_title {
+  grid-row: headline;
+  padding-top: clamp(80px, 56px + 7.5vw, 200px);
+  font-size: clamp(2.28rem, 5.2vw + 1.24rem, 7.48rem);
+  font-weight: 400;
+  line-height: calc(6px + 2.125ex);
+  word-break: keep-all;
+}
+
+.hero_cta {
+  grid-row: cta;
+  padding-top: var(--hero-gap);
+}
+
+.hero_link {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 16px 28px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: calc(6px + 2.125ex);
+  background-color: rgba(156, 156, 159, .302);
+  backdrop-filter: blur(32px);
+  transform: translate3d(0, 0, 0);
+  transition: background-color .25s cubic-bezier(.25, .1, .25, 1);
+}
+
+/* 원본 p-link 호스트의 등장 애니메이션과 내부 버튼을 분리한다. */
+.hero_link_frame {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  border-radius: 12px;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: hero_button_enter .4s ease .6s forwards;
+}
+
+@keyframes hero_button_enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero_playback {
+  grid-area: scroll / -3 / bottom / -2;
+  z-index: 3;
+  place-self: end;
+  animation: hero_button_enter .4s ease .6s forwards;
+  opacity: 0;
+}
+
+.hero_playback_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border: 0;
+  border-radius: 50%;
+  color: #fafbff;
+  background-color: rgba(156, 156, 159, .302);
+  backdrop-filter: blur(32px);
+  transform: translate3d(0, 0, 0);
+  cursor: pointer;
+  transition: background-color .25s cubic-bezier(.25, .1, .25, 1);
+}
+
+.hero_playback_button svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.hero_playback_button svg[hidden] { display: none; }
+
+.hero_playback_button:focus-visible {
+  outline: 2px solid #1a44ea;
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .hero_playback_button:hover { background-color: hsla(240, 2%, 43%, .228); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero_link_frame,
+  .hero_playback { animation: none; opacity: 1; transform: none; }
+}
+
+.hero_link:focus-visible {
+  outline: 2px solid #1a44ea;
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .hero_link:hover { background-color: hsla(240, 2%, 43%, .228); }
+}
+
+/* 다음 단계에 추가할 원본 스크롤 표시 영역의 공간 */
+.hero::before {
+  content: "";
+  grid-area: scroll / full-start / bottom / full-end;
+  height: calc(var(--hero-scroll-padding) + var(--hero-scroll-size));
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  z-index: 2;
+  grid-area: headline / full-start / -1 / full-end;
+  pointer-events: none;
+  background: linear-gradient(0deg,
+    rgba(0,0,0,.8) 0%, rgba(0,0,0,.8) 8.1%, rgba(0,0,0,.8) 15.5%,
+    rgba(0,0,0,.8) 22.5%, rgba(0,0,0,.78) 29%, rgba(0,0,0,.73) 35.3%,
+    rgba(0,0,0,.67) 41.2%, rgba(0,0,0,.6) 47.1%, rgba(0,0,0,.52) 52.9%,
+    rgba(0,0,0,.44) 58.8%, rgba(0,0,0,.33) 64.7%, rgba(0,0,0,.22) 71%,
+    rgba(0,0,0,.12) 77.5%, rgba(0,0,0,.05) 84.5%, rgba(0,0,0,.01) 91.9%, transparent);
+}
+
+.featured{
+  
+}
+
+@media (min-width: 760px) {
+  .hero {
+    --hero-safe-zone: calc(5vw - 16px);
+    grid-template-columns:
+      [full-start] minmax(0, calc(var(--hero-safe-zone) - var(--hero-gap)))
+      minmax(0, 1fr) [extended-start] repeat(14, minmax(0, 1fr))
+      [extended-end] minmax(0, 1fr)
+      minmax(0, calc(var(--hero-safe-zone) - var(--hero-gap))) [full-end];
+  }
+  .hero_link_frame { width: fit-content; }
+  .hero::after { grid-row: cta / -1; }
+}
+
+@media (min-width: 1000px) {
+  .hero_playback_button { padding: 16px; }
+  .hero {
+    --hero-scroll-padding: var(--hero-gap);
+    --hero-scroll-size: 45px;
+  }
+  .hero_title,
+  .hero_cta { grid-column: extended-start / span 7; }
+  .hero_title { padding-top: clamp(32px, 23px + 2.75vw, 76px); }
+}
+
+@media (min-width: 1300px) {
+  .hero { --hero-scroll-size: 54px; }
+}
+
+@media (min-width: 1920px) {
+  .hero { --hero-safe-zone: min(50vw - 880px, 400px); }
+}
+
 /* 원본 헤더의 화면 너비별 높이와 여백 */
 @media (max-width: 759px) {
   .text_menu {
