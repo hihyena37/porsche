@@ -1,0 +1,79 @@
+/* 한국 공식 pnav-footer 4.0.2의 레이아웃·콘텐츠 규칙을 일반 HTML로 옮김. */
+.site_footer {
+  background: #010205;
+  color: #fafbff;
+  font-size: 16px;
+  line-height: 24px;
+}
+.footer_inner {
+  box-sizing: content-box;
+  max-width: 1300px;
+  margin-inline: auto;
+  padding: 60px 30px;
+  display: grid;
+  gap: var(--space-lg);
+}
+.site_footer h2 {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: calc(6px + 2.125ex);
+}
+.site_footer a:focus-visible,
+.footer_top:focus-visible { outline: 2px solid #1a44ea; outline-offset: 2px; }
+.footer_top {
+  margin-inline: auto;
+  padding-inline: 8px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  min-width: 44px;
+  cursor: pointer;
+}
+.footer_icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: currentColor;
+  mask: var(--footer-icon) center / contain no-repeat;
+}
+.footer_top .footer_icon { box-sizing: content-box; border: 4px solid transparent; margin-inline: auto; }
+.footer_top > span:last-child { display: block; margin-top: 12px; }
+.footer_locale { display: flex; align-items: center; margin-top: 16px; }
+.footer_locale img { box-sizing: content-box; border: 1px solid rgba(247, 247, 248, .56); border-radius: 50%; margin-right: 18px; }
+.footer_locale span { padding-right: 24px; }
+.footer_locale a { text-decoration: underline; text-underline-offset: 3px; }
+.footer_columns { display: grid; grid-template-columns: 1fr; gap: var(--space-lg); align-items: start; }
+.footer_group { display: grid; gap: clamp(8px, .5vw + 6px, 16px); }
+.footer_group li + li { margin-top: clamp(8px, .5vw + 6px, 16px); }
+.footer_group a { display: inline-block; padding-left: 2px; }
+.footer_social_apps { display: grid; grid-template-columns: 1fr; gap: var(--space-md); }
+.footer_social { display: flex; flex-wrap: wrap; gap: 8px; }
+.footer_social a { display: block; padding: 10px; }
+.footer_apps { display: flex; align-items: center; margin-left: -8px; }
+.footer_apps a { display: contents; }
+.footer_apps img { width: auto; height: 49.5px; }
+.footer_fineprint { color: rgba(247, 247, 248, .67); }
+.footer_copyright { margin-bottom: 8px; }
+.footer_legal_links a,
+.footer_legal_text a { text-decoration: underline; text-underline-offset: 3px; }
+.footer_legal_text { margin-top: 12px; font-size: 14px; line-height: calc(6px + 2.125ex); }
+.footer_legal_text p + p { margin-top: 1em; }
+.footer_wordmark { display: flex; justify-content: center; }
+.footer_wordmark svg { display: none; width: 240px; height: 16px; fill: currentColor; }
+.footer_wordmark .footer_crest { display: block; }
+@media (hover: hover) {
+  .footer_group a:hover,
+  .footer_locale a:hover,
+  .footer_legal_links a:hover,
+  .footer_legal_text a:hover { color: #949598; }
+  .footer_social a:hover { background: rgba(156, 156, 159, .302); border-radius: 50%; }
+}
+@media (min-width: 760px) {
+  .footer_columns { grid-template-columns: repeat(3, 1fr); }
+  .footer_social_apps { grid-template-columns: auto 1fr; place-items: center; gap: var(--space-lg); }
+  .footer_social { gap: 20px; }
+  .footer_apps { width: 100%; }
+  .footer_wordmark .footer_crest { display: none; }
+  .footer_wordmark svg { display: block; }
+}
