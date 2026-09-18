@@ -7,6 +7,8 @@
 a {
   color: inherit;
   text-decoration: none;
+  /* 이동 주소가 없는 메인페이지 시안에서도 원본의 호버 커서를 유지한다. */
+  cursor: pointer;
 }
 
 ul {
@@ -31,6 +33,49 @@ body {
 }
 
 /* 헤더 */
+.logo .header_tooltip,
+.country .header_tooltip,
+.my .header_tooltip {
+  visibility: hidden;
+  position: absolute;
+  top: calc(50% + 15.5px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 0 4px;
+  border-radius: 2px;
+  background: #404044;
+  color: #fff;
+  font: 13px/24px "Porsche Next", "Arial Narrow", Arial, "Heiti SC", SimHei, sans-serif;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.logo:hover .header_tooltip, .logo:focus-visible .header_tooltip,
+.country:hover .header_tooltip, .country:focus-visible .header_tooltip,
+.my:hover .header_tooltip, .my:focus-visible .header_tooltip { visibility: visible; }
+
+/* porsche.aiccsharing.com/css/chatbot.css의 원본 버튼 수치. */
+.chat_button {
+  position: fixed;
+  right: 0;
+  bottom: 160px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  padding: 1px 6px;
+  border: 0;
+  border-radius: 4px 0 0 4px;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0,0,0,.1);
+  cursor: pointer;
+}
+.chat_button svg { width: 40px; height: 40px; }
+.chat_button:focus-visible { outline: 2px solid #1a44ea; outline-offset: -2px; }
+
 header {
   position: absolute;
   top: 0;

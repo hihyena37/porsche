@@ -1,4 +1,18 @@
 /* 공식 CarRange / DesktopCarRangeTile / MobileCarRangeTile에서 확인한 수치. */
+body { background-color: #fff; }
+body.trip_dark { animation: trip_dark_background 1.2s cubic-bezier(.4,0,.5,1) forwards; }
+body.trip_light { animation: trip_light_background 1.2s cubic-bezier(.4,0,.5,1) forwards; }
+@keyframes trip_dark_background { from { background-color: #fff; } to { background-color: #010205; } }
+@keyframes trip_light_background { from { background-color: #010205; } to { background-color: #fff; } }
+.trip-title { transition: color 1.2s cubic-bezier(.4,0,.5,1); }
+body.trip_dark .trip-title { color: #fff; }
+.trip_signature { transition: background-color 1s cubic-bezier(0,0,.2,1); }
+body.trip_dark .trip_signature { background-color: #fff; }
+.trip_arrow_label { display: none; }
+.trip_resizing .trip_item { transition: none; }
+.trip_title_pending { opacity: 0; transform: translateY(40px); }
+.trip_title_visible { animation: trip_title_enter 1.2s cubic-bezier(0,0,.2,1) forwards; }
+@keyframes trip_title_enter { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 .trip {
   --trip-small: clamp(8px, 6px + .5vw, 16px);
   --trip-gradient: linear-gradient(to top, rgba(0, 0, 0, .8) 0%, rgba(0, 0, 0, .8) 8.1%, rgba(0, 0, 0, .8) 15.5%, rgba(0, 0, 0, .8) 22.5%, rgba(0, 0, 0, .78) 29%, rgba(0, 0, 0, .73) 35.3%, rgba(0, 0, 0, .67) 41.2%, rgba(0, 0, 0, .6) 47.1%, rgba(0, 0, 0, .52) 52.9%, rgba(0, 0, 0, .44) 58.8%, rgba(0, 0, 0, .33) 64.7%, rgba(0, 0, 0, .22) 71%, rgba(0, 0, 0, .12) 77.5%, rgba(0, 0, 0, .05) 84.5%, rgba(0, 0, 0, .01) 91.9%, transparent);
@@ -17,6 +31,7 @@
 }
 
 .tripbox {
+  position: relative;
   display: flex;
   gap: var(--space-md);
   overflow-x: auto;
@@ -41,9 +56,14 @@
   height: 36px;
   max-width: 100%;
   margin: 0 auto var(--space-md);
-  background: #0e0e12;
-  mask: var(--signature) left top / contain no-repeat;
+  background: transparent;
 }
+.trip_signature img { width: 100%; height: 36px; object-fit: contain; object-position: left top; filter: brightness(0); transition: filter 1s cubic-bezier(0,0,.2,1); }
+body.trip_dark .trip_signature { background: transparent; }
+body.trip_dark .trip_signature img { filter: brightness(0) invert(1); }
+.trip_video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
+.trip_media { z-index: 0; opacity: 1; transition: opacity .6s ease; }
+.trip_item.is_video_playing .trip_media { opacity: 0; pointer-events: none; }
 
 .trip_sr {
   position: absolute;
@@ -96,12 +116,18 @@
 }
 
 .trip_tags span {
+  flex-shrink: 0;
+  white-space: nowrap;
   padding: 4px 12px;
   font-size: 14px;
   line-height: calc(6px + 2.125ex);
   border-radius: 100px;
   background: rgba(156, 156, 159, .302);
   backdrop-filter: blur(32px);
+}
+/* 원본 MobileCarRangeTile은 주문 불가 안내만 모바일에서 줄바꿈을 허용한다. */
+@media (max-width: 759px) {
+  .trip_item:nth-child(2) .trip_tags span { flex-shrink: 1; white-space: normal; }
 }
 
 .trip_description,
@@ -230,10 +256,11 @@
     left: 0;
     right: 0;
     margin: var(--space-md) auto;
-    background: #fff;
+    background: transparent;
     z-index: 2;
     pointer-events: none;
   }
+  .trip_signature img { filter: brightness(0) invert(1); }
 
   .trip_card::before {
     content: "";
@@ -290,6 +317,10 @@
 }
 
 @media (min-width: 760px) and (hover: hover) {
+  .trip_item:hover .trip_arrow_label { display: inline; }
+  .trip_item:hover .trip_arrow { border-radius: 8px; gap: 4px; padding-left: var(--trip-small); padding-right: calc(var(--space-xs) * .9); }
+  .trip_arrow_label { font-size: 16px; line-height: 24px; white-space: nowrap; }
+  .trip_item:hover .trip_description { margin-right: 8px; }
   .trip_item:hover {
     width: calc(55% - 1.5 * var(--space-md));
   }
@@ -330,6 +361,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  body.trip_dark, body.trip_light { animation-duration: 0s; }
+  .trip-title, .trip_signature { transition: none; }
+  .trip_title_pending, .trip_title_visible { opacity: 1; transform: none; animation: none; }
   .trip_item {
     transition: none;
   }
